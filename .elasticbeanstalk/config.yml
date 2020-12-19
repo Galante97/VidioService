@@ -1,0 +1,19 @@
+branch-defaults:
+  default:
+    environment: DeepVidioService
+environment-defaults:
+  DeepVidioService:
+    branch: null
+    repository: null
+global:
+  application_name: DeepVidioService
+  default_ec2_keyname: DeepWatermarkServiceKeys
+  default_platform: Multi-container Docker running on 64bit Amazon Linux
+  default_region: us-east-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  sc: null
+  workspace_type: Application

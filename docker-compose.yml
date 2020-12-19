@@ -1,0 +1,34 @@
+version: '2'
+services:
+    service-web:
+        build: .
+        image: jgalante97/deep-vidio-service-web:latest
+        container_name: service-web
+        ports:
+         - 80:5000
+         - 443:5000
+        command: python manage.py run -h 0.0.0.0
+        volumes:
+            - .:/app
+        depends_on:
+            - redis
+        
+    
+    service-worker:
+        build: .
+        image: jgalante97/deep-vidio-service-worker:latest
+        container_name: service-worker
+        command: python manage.py run_worker
+        volumes:
+        - .:/app
+        depends_on:
+        - redis
+        - service-web
+
+
+    redis:
+        image: redis:5.0.7-alpine
+
+
+      
+

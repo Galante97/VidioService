@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Index</title>
+</head>
+<body>
+
+    <h1 style="color: blue">Index!</h1>
+    <p>Watermark backend up and running</p>
+    <img style="max-width: 500px;" src="{{ url_for('static', filename='img/test.jpg') }}" alt="">
+
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

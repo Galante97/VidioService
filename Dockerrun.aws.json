@@ -1,0 +1,79 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "redis",
+            "essential": true,
+            "image": "redis:5.0.7-alpine",
+            "memory": 256,
+            "cpu": 1,
+            "portMappings": [
+                {
+                  "hostPort": 6379,
+                  "containerPort": 6379
+                }
+            ]
+        },
+        {
+            "name": "service-web",
+            "command": [
+                "python",
+                "manage.py",
+                "run",
+                "-h",
+                "0.0.0.0"
+            ],
+            "essential": true,
+            "image": "jgalante97/deep-vidio-service-web:latest",
+            "mountPoints": [
+                {
+                    "containerPath": "/app",
+                    "sourceVolume": "appvolume"
+                }
+            ],
+            "memory": 256,
+            "cpu": 1,
+            "portMappings":[
+                {
+                    "containerPort": 5000,
+                    "hostPort": 80
+                },
+                {
+                    "containerPort": 5000,
+                    "hostPort": 443
+                }
+            ],
+            "links": ["redis"]
+
+        },
+        {
+            "name": "service-worker",
+            "command": [
+                "python",
+                "manage.py",
+                "run_worker"
+            ],
+            "essential": true,
+            "image": "jgalante97/deep-vidio-service-worker:latest",
+            "mountPoints": [
+                {
+                    "containerPath": "/app",
+                    "sourceVolume": "appvolume"
+                }
+            ],
+            "memory": 256,
+            "cpu": 1,
+            "links": ["redis"]
+        }
+
+    ],
+    "family": "",
+    "volumes": [
+        {
+            "host": {
+                "sourcePath": "/var/app/current/"
+            },
+            "name": "appvolume"
+        }
+    ]
+}

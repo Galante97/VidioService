@@ -1,0 +1,26 @@
+language: python
+services:
+  - docker
+before_script: pip install docker-compose
+#script:
+  # since there's a dependency on mongo, it will build that image also
+  # although we have not added any tests scenario
+  #- docker-compose run service-2 sh -c "pytest"
+after_success:
+  docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
+  docker-compose build ;
+
+  docker push $DOCKER_USERNAME/deep-vidio-service-web 
+  docker push $DOCKER_USERNAME/deep-vidio-service-worker ;
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-1
+  app: DeepVidioService
+  env: DeepVidioService
+  bucket-name: elasticbeanstalk-us-east-1-831217947123
+  bucket-path: DeepVidioService
+  on:
+    branch: aws_deployment
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY

@@ -1,0 +1,29 @@
+redis:
+  image: redis:5.0.7-alpine
+  ports:
+  - 6379:6379
+serviceweb:
+  command:
+  - python
+  - manage.py
+  - run
+  - -h
+  - 0.0.0.0
+  image: jgalante97/deep-vidio-service-web:latest
+  links:
+  - redis:redis
+  ports:
+  - 80:5000
+  - 443:5000
+  volumes:
+  - /Users/jamesgalante/PROJECTS/DeepVideo.io/Backend/1.0/app/:/app
+serviceworker:
+  command:
+  - python
+  - manage.py
+  - run_worker
+  image: jgalante97/deep-vidio-service-worker:latest
+  links:
+  - redis:redis
+  volumes:
+  - /Users/jamesgalante/PROJECTS/DeepVideo.io/Backend/1.0/app/:/app

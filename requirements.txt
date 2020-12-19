@@ -1,0 +1,6 @@
+rq==1.6.1
+redis==3.5.3
+Flask_Cors==3.0.9
+Werkzeug==1.0.1
+Flask==1.1.2
+treeHandler==1.5
