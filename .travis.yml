@@ -1,17 +1,22 @@
 language: python
 services:
   - docker
-before_script: pip install docker-compose
-#script:
-  # since there's a dependency on mongo, it will build that image also
-  # although we have not added any tests scenario
-  #- docker-compose run service-2 sh -c "pytest"
-after_success:
-  docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
-  docker-compose build ;
+before_script: 
+  - pip install docker-compose
+before_install:
+  - echo "Testing Docker Hub credentials"
+  - docker login -e=$DOCKER_EMAIL -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
+  - echo "Docker Hub credentials are working"
+  - docker build -t build-springxd-base .
 
-  docker push $DOCKER_USERNAME/deep-vidio-service-web 
-  docker push $DOCKER_USERNAME/deep-vidio-service-worker ;
+script:
+  - docker ps -a
+after_success:
+  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
+  - docker-compose build ;
+
+  - docker push $DOCKER_USERNAME/deep-vidio-service-web 
+  - docker push $DOCKER_USERNAME/deep-vidio-service-worker ;
 
 deploy:
   provider: elasticbeanstalk

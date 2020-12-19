@@ -45,3 +45,5 @@ https://testdriven.io/blog/asynchronous-tasks-with-flask-and-redis-queue/
 https://testdriven.io/blog/asynchronous-tasks-with-flask-and-redis-queue/ 
 
 ## Deployed with Travis ci
+
+https://travis-ci.com/github/Galante97/VidioService
