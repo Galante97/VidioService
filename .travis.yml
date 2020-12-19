@@ -3,12 +3,6 @@ services:
   - docker
 before_script: 
   - pip install docker-compose
-before_install:
-  - echo "Testing Docker Hub credentials"
-  - docker login -e=$DOCKER_EMAIL -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
-  - echo "Docker Hub credentials are working"
-  - docker build -t build-springxd-base .
-
 script:
   - docker ps -a
 after_success:
