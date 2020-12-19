@@ -41,4 +41,7 @@ cd /var/app/current/
 
 ## Useful links
 https://testdriven.io/blog/asynchronous-tasks-with-flask-and-redis-queue/
+
 https://testdriven.io/blog/asynchronous-tasks-with-flask-and-redis-queue/ 
+
+## Deployed with Travis ci
