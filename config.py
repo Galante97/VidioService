@@ -20,7 +20,7 @@ class Config(object):
     REDIS_URL = "redis://redis:6379/0"
     QUEUES = ["default"]
 
-    CORS_ALLOWED_URLS = ["https://watermarker.deepvid.io", "https://*.deepvid.io", "https//deepvid.io", "http://deepvidioservice.eba-je7zb9id.us-east-1.elasticbeanstalk.com/", "http://localhost:4200"]
+    CORS_ALLOWED_URLS = ["http://localhost:4200", "https://watermarker.deepvid.io", "https://*.deepvid.io", "https//deepvid.io"]
 
 
 class ProductionConfig(Config):
