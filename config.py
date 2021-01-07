@@ -20,6 +20,8 @@ class Config(object):
     REDIS_URL = "redis://redis:6379/0"
     QUEUES = ["default"]
 
+    CORS_ALLOWED_URLS = ["http://localhost:4200", "https://watermarker.deepvid.io", "https://*.deepvid.io", "https//deepvid.io"]
+
 
 class ProductionConfig(Config):
     pass
