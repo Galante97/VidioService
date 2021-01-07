@@ -4,8 +4,7 @@ from app import app
 import redis
 from rq import Queue, Connection
 from flask import Flask, render_template, Blueprint, jsonify, request, current_app
-
-
+from flask_cors import CORS, cross_origin
 
 
 @app.route("/")
