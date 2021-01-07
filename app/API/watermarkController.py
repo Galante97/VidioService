@@ -41,7 +41,7 @@ def get_project_status(task_id):
     return {"jobStartedAt" : started_at, "jobEndedAt": ended_at}
 
 @app.route("/testGetReq", methods=["GET"])
-@cross_origin()
+@cross_origin(origins=["watermarker.deepvid.io", "*.deepvid.io", "deepvid.io"])
 def getTest():
     return {"test": "test email", "code": "test code"}
 
