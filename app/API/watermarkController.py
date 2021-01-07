@@ -1,4 +1,5 @@
 from app import app
+
 from werkzeug.utils import secure_filename
 from flask import Flask, render_template, Blueprint, jsonify, request, current_app, send_from_directory
 import os, shutil
@@ -7,6 +8,7 @@ import time
 import json
 import math
 from treeHandler import treeHandler
+from flask_cors import CORS, cross_origin
 
 from app.BusinessLayer import watermarkBL
 
@@ -39,21 +41,28 @@ def get_project_status(task_id):
     return {"jobStartedAt" : started_at, "jobEndedAt": ended_at}
 
 @app.route("/testGetReq", methods=["GET"])
+@cross_origin()
 def getTest():
     return {"test": "test email", "code": "test code"}
 
 @app.route("/watermarker/deleteAllProject")
 def deleteAllProject():
+    min_15 = 15 * 60
+    timeMinus15 = time.time() - min_15
+    projectOlderThan15 = "project_" + str(timeMinus15).replace('.', '-')
+
     folder = app.config["PROJECTS_PATH"] 
-    for filename in os.listdir(folder):
-        file_path = os.path.join(folder, filename)
-        try:
-            if os.path.isfile(file_path) or os.path.islink(file_path):
-                os.unlink(file_path)
-            elif os.path.isdir(file_path):
-                shutil.rmtree(file_path)
-        except Exception as e:
-            print('Failed to delete %s. Reason: %s' % (file_path, e))
+    for currProject in os.listdir(folder):
+        if (projectOlderThan15 > currProject):
+            file_path = os.path.join(folder, currProject)
+            try:
+                if os.path.isfile(file_path) or os.path.islink(file_path):
+                    os.unlink(file_path)
+                elif os.path.isdir(file_path):
+                    shutil.rmtree(file_path)
+            except Exception as e:
+                print('Failed to delete %s. Reason: %s' % (file_path, e))
+    print("DELETING OBJECTS")
     return "All projects deleted."
 
 

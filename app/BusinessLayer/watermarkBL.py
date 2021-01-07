@@ -1,5 +1,4 @@
 from app import app
-
 from flask import Flask, render_template, Blueprint, jsonify, request, current_app
 
 import json
@@ -14,8 +13,6 @@ import subprocess
 
 import redis
 from rq import Queue, Connection
-
-
 
 
 # Globals

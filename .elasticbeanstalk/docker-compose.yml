@@ -16,7 +16,7 @@ serviceweb:
   - 80:5000
   - 443:5000
   volumes:
-  - /Users/jamesgalante/PROJECTS/DeepVideo.io/Backend/1.0/app/:/app
+  - /Users/jamesgalante/PROJECTS/DeepVid.io/Backend/app/:/app
 serviceworker:
   command:
   - python
@@ -26,4 +26,4 @@ serviceworker:
   links:
   - redis:redis
   volumes:
-  - /Users/jamesgalante/PROJECTS/DeepVideo.io/Backend/1.0/app/:/app
+  - /Users/jamesgalante/PROJECTS/DeepVid.io/Backend/app/:/app

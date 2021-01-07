@@ -47,3 +47,10 @@ https://testdriven.io/blog/asynchronous-tasks-with-flask-and-redis-queue/
 ## Deployed with Travis ci
 
 https://travis-ci.com/github/Galante97/VidioService
+
+Every push to github will redeploy the application to docker and aws:
+```
+git add .
+git commit -m ""
+git push -u origin master
+```
