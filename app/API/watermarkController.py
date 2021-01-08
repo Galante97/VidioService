@@ -17,6 +17,7 @@ import redis
 from rq import Queue, Connection
 
 @app.route("/watermarker", methods=["GET", "POST"])
+@cross_origin(origins=app.config["CORS_ALLOWED_URLS"])
 def watermarkAPI():
     print("WATERMARK API")
 
@@ -27,6 +28,7 @@ def watermarkAPI():
 
 
 @app.route("/watermarker/tasks/<task_id>", methods=["GET"])
+@cross_origin(origins=app.config["CORS_ALLOWED_URLS"])
 def get_project_status(task_id):
     started_at = None
     ended_at = None
@@ -46,6 +48,7 @@ def getTest():
     return {"test": "test email", "code": "test code"}
 
 @app.route("/watermarker/deleteAllProject")
+@cross_origin(origins=app.config["CORS_ALLOWED_URLS"])
 def deleteAllProject():
     min_15 = 15 * 60
     timeMinus15 = time.time() - min_15
@@ -68,6 +71,7 @@ def deleteAllProject():
 
 
 @app.route("/download/<projectPath>/<file>")
+@cross_origin(origins=app.config["CORS_ALLOWED_URLS"])
 def download(projectPath, file):
     print("projectPath", projectPath)
     print("vid", file)
@@ -81,6 +85,7 @@ def download(projectPath, file):
 
 
 @app.route("/checkPath")
+@cross_origin(origins=app.config["CORS_ALLOWED_URLS"])
 def checkPath():
     th=treeHandler()
     fileTuple=th.getFiles('app')
