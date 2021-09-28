@@ -2,6 +2,8 @@
 
 This project holds all of the api backends for the deep vidio watermarker
 
+Live at https://Deepvid.io/
+
 ## Docker
 
 made up of jgalante97/deep-vidio-service-web, jgalante97/deep-vidio-service-worker, and redis
